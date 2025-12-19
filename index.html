@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market.ua | Купівля та продаж у Україні</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Базові стилі */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, .logo {
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 700;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайту */
+        header {
+            background: linear-gradient(135deg, #0057b8 0%, #ffd700 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo-ua {
+            color: #ffd700;
+        }
+        
+        /* Стилі для заголовка з фото в шапці */
+        .header-title {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            flex-grow: 1;
+            justify-content: center;
+        }
+        
+        .header-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .header-image img {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Адаптивність для заголовка */
+        @media (max-width: 992px) {
+            .header-title {
+                display: none; /* Приховуємо на мобільних */
+            }
+        }
+        
+        /* Головний баннер */
+        .hero {
+            background: linear-gradient(rgba(0, 87, 184, 0.85), rgba(0, 87, 184, 0.9)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            margin-bottom: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ffd700;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: #0057b8;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #004494;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: #ffd700;
+            color: #0057b8;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e6c200;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Секції */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #0057b8;
+            font-size: 2.2rem;
+        }
+        
+        /* Категорії */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            padding: 25px 20px;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            color: #0057b8;
+            margin-bottom: 15px;
+        }
+        
+        /* Оголошення */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0057b8;
+            margin-bottom: 15px;
+        }
+        
+        .product-price::after {
+            content: " грн";
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .product-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-location i {
+            color: #0057b8;
+            margin-right: 5px;
+        }
+        
+        .product-contact {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .contact-btn {
+            background-color: #ffd700;
+            color: #0057b8;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-btn:hover {
+            background-color: #e6c200;
+        }
+        
+        /* Як це працює */
+        .how-it-works {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background-color: #0057b8;
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        /* Форма */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Підвал */
+        footer {
+            background-color: #1a1a2e;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 25px;
+            color: #ffd700;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #ffd700;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #2d3047;
+            color: white;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: #0057b8;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #2d3047;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Правила безпеки */
+        .safety-rules {
+            background-color: #fff8e1;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #ffd700;
+            margin-top: 40px;
+        }
+        
+        /* Адаптивність */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                display: none;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        /* Модальне вікно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .location-badge {
+            display: inline-block;
+            background-color: #ffd700;
+            color: #0057b8;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайту -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#home" class="logo">
+                    <i class="fas fa-store"></i>
+                    <span>Market<span class="logo-ua">.ua</span></span>
+                </a>
+                
+                <!-- ДОДАНО: Заголовок та фото після назви -->
+                <div class="header-title">
+                    <div class="header-text">
+                        Купівля та продаж речей • Україна
+                    </div>
+                    <div class="header-image">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=50&q=80" 
+                             alt="Market.ua Кам'янське" 
+                             style="height: 40px; border-radius: 5px; margin-left: 10px;">
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="mobile-menu" id="mainNav">
+                    <ul>
+                        <li><a href="#home" class="active">Головна</a></li>
+                        <li><a href="#catalog">Оголошення</a></li>
+                        <li><a href="#how-to-buy">Як купити</a></li>
+                        <li><a href="#how-to-sell">Додати оголошення</a></li>
+                        <li><a href="#contacts">Контакти</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Головний баннер -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="location-badge">
+                <i class="fas fa-map-marker-alt"></i> Україна
+            </div>
+            <h1>Купівля та продаж речей у Україні</h1>
+            <p>Знайдіть потрібні речі поруч з собою або продайте те, що вам більше не потрібно.</p>
+            <div class="hero-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Кам'янське та Дніпропетровська область</span>
+            </div>
+            <div class="cta-buttons">
+                <a href="#catalog" class="btn btn-primary">Переглянути оголошення</a>
+                <a href="#how-to-sell" class="btn btn-secondary">Додати оголошення</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- Категорії товарів -->
+        <section id="categories">
+            <h2 class="section-title">Категорії</h2>
+            <div class="categories">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Автомобілі</h3>
+                    <p>Легкові, мото, вантажні, запчастини</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Телефони та техніка</h3>
+                    <p>Смартфони, планшети, ноутбуки, побутова техніка</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Одяг та взуття</h3>
+                    <p>Чоловічий, жіночий та дитячий одяг, взуття, аксесуари</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Дім та сад</h3>
+                    <p>Меблі, техніка для дому, інструменти, будматеріали</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Оголошення -->
+        <section id="catalog">
+            <h2 class="section-title">Свіжі оголошення</h2>
+            <div class="products">
+                <!-- Оголошення 1 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Продам Volkswagen Passat B7</h3>
+                        <div class="product-price">280000</div>
+                        <p class="product-description">2014 рік, 1.8 TSI, автомат, повна комплектація, чорний металик, 145 тис. км. Обслуговування у офіційному дилері. Без ДТП.</p>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> Кам'янське, Проспект Свободи
+                        </div>
+                        <div class="product-contact">
+                            <span><i class="far fa-calendar"></i> Додано сьогодні</span>
+                            <a href="#" class="contact-btn" onclick="openContactModal('Продам Volkswagen Passat B7', '280000')">Зв'язатись</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Оголошення 2 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 13 Pro 256GB</h3>
+                        <div class="product-price">32000</div>
+                        <p class="product-description">Синій, ідеальний стан, батарея 94%, гарантія до 12.2024. В комплекті: оригінальна зарядка, чохол, навушники.</p>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> Кам'янське, Центр
+                        </div>
+                        <div class="product-contact">
+                            <span><i class="far fa-calendar"></i> Додано вчора</span>
+                            <a href="#" class="contact-btn" onclick="openContactModal('iPhone 13 Pro 256GB', '32000')">Зв'язатись</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Оголошення 3 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Чоловічі кросівки Nike Air Max</h3>
+                        <div class="product-price">1800</div>
+                        <p class="product-description">Розмір 43, нові, ніколи не носили. Куплені в інтернет-магазині, не підійшли за розміром. Оригінал, з коробкою.</p>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> Кам'янське, Соцмісто
+                        </div>
+                        <div class="product-contact">
+                            <span><i class="far fa-calendar"></i> Додано 2 дні тому</span>
+                            <a href="#" class="contact-btn" onclick="openContactModal('Чоловічі кросівки Nike Air Max', '1800')">Зв'язатись</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Оголошення 4 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Шкіряна куртка чоловіча</h3>
+                        <div class="product-price">2500</div>
+                        <p class="product-description">Натуральна шкіра, розмір L, стан відмінний. Носилась один сезон. Колір чорний, універсальна модель.</p>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> Кам'янське, Пд. Вузол
+                        </div>
+                        <div class="product-contact">
+                            <span><i class="far fa-calendar"></i> Додано 3 дні тому</span>
+                            <a href="#" class="contact-btn" onclick="openContactModal('Шкіряна куртка чоловіча', '2500')">Зв'язатись</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#catalog" class="btn btn-primary">Показати всі оголошення</a>
+            </div>
+        </section>
+
+        <!-- Як купити -->
+        <section id="how-to-buy">
+            <h2 class="section-title">Як купити товар на Market.ua</h2>
+            <div class="how-it-works">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Знайдіть товар</h3>
+                    <p>Перегляньте оголошення або скористайтеся пошуком. Обирайте речі у вашому місті.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Зв'яжіться з продавцем</h3>
+                    <p>Натисніть кнопку "Зв'язатись" на картці товара та домовтесь про зустріч.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Зустріньтесь та перевірте</h3>
+                    <p>Зустріньтесь у безпечному місці, перевірте товар та обговоріть остаточну ціну.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Заберіть покупку</h3>
+                    <p>Оплатіть готівкою при отриманні та заберіть свій товар.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Додати оголошення -->
+        <section id="how-to-sell">
+            <h2 class="section-title">Додати оголошення</h2>
+            <div class="form-container">
+                <h3 style="text-align: center; margin-bottom: 30px; color: #0057b8;">Розмістіть своє оголошення безкоштовно</h3>
+                
+                <form id="sellForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="productName">Назва оголошення *</label>
+                        <input type="text" id="productName" required placeholder="Наприклад: Продам iPhone 13, Шкіряна куртка">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productCategory">Категорія *</label>
+                        <select id="productCategory" required>
+                            <option value="">Оберіть категорію</option>
+                            <option value="auto">Автомобілі</option>
+                            <option value="phones">Телефони та техніка</option>
+                            <option value="clothes">Одяг та взуття</option>
+                            <option value="home">Дім та сад</option>
+                            <option value="other">Інше</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productPrice">Ціна (грн) *</label>
+                        <input type="number" id="productPrice" required placeholder="Наприклад: 5000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productDescription">Опис товару *</label>
+                        <textarea id="productDescription" required placeholder="Опишіть стан товару, комплектацію, особливості..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sellerContact">Ваші контакти *</label>
+                        <input type="text" id="sellerContact" required placeholder="Телефон або email для зв'язку">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sellerCity">Місцезнаходження *</label>
+                        <input type="text" id="sellerCity" value="Кам'янське, Дніпропетровська область" required>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 300px;">Розмістити оголошення</button>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #666;">
+                        Після відправки форми ваше оголошення з'явиться на сайті протягом 24 годин.
+                    </p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Правила безпеки -->
+        <section id="safety-rules">
+            <h2 class="section-title">Правила безпеки</h2>
+            <div class="safety-rules">
+                <h3 style="margin-bottom: 15px; color: #856404;"><i class="fas fa-shield-alt"></i> Важливі рекомендації для безпечних угод</h3>
+                <ul style="list-style-position: inside; color: #856404;">
+                    <li style="margin-bottom: 10px;">Зустрічайтеся у людних місцях: торгових центрах, кафе, окремих відділеннях банків.</li>
+                    <li style="margin-bottom: 10px;">Перевіряйте товар перед оплатою. Не соромтесь тестувати техніку.</li>
+                    <li style="margin-bottom: 10px;">Не перераховуйте передоплату незнайомим людям. Платіть лише при отриманні товару.</li>
+                    <li style="margin-bottom: 10px;">Повідомляйте про підозрілі пропозиції адміністрації сайту.</li>
+                    <li>Market.ua не є учасником угод та не несе відповідальності за домовленості між покупцями та продавцями.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Підвал сайту -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Market.ua</h3>
+                    <p>Місцевий майданчик для безпечної купівлі та продажу речей у Україні.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-viber"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Швидкі посилання</h3>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Головна</a></li>
+                        <li><a href="#catalog"><i class="fas fa-chevron-right"></i> Оголошення</a></li>
+                        <li><a href="#how-to-buy"><i class="fas fa-chevron-right"></i> Як купити</a></li>
+                        <li><a href="#how-to-sell"><i class="fas fa-chevron-right"></i> Додати оголошення</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакти</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@marketua.com</li>
+                        <li><i class="fas fa-phone"></i> +38 (067) 123-45-67</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Кам'янське, Дніпропетровська область</li>
+                        <li><i class="far fa-clock"></i> Підтримка: Пн-Пт 9:00-18:00</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Допомога</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Часті запитання</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Правила користування</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Політика конфіденційності</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Для бізнесу</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Market.ua. Всі права захищено.</p>
+                <p>Сайт створено для потреб мешканців України.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальне вікно для зв'язку -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 style="margin-bottom: 20px; color: #0057b8;">Зв'язатися з продавцем</h3>
+            <p>Товар: <strong id="modalProductName"></strong></p>
+            <p>Ціна: <strong id="modalProductPrice"></strong> грн</p>
+            
+            <div class="form-group" style="margin-top: 25px;">
+                <label for="buyerName">Ваше ім'я *</label>
+                <input type="text" id="buyerName" placeholder="Іван Іванов">
+            </div>
+            
+            <div class="form-group">
+                <label for="buyerContact">Ваші контакти *</label>
+                <input type="text" id="buyerContact" placeholder="Телефон або email">
+            </div>
+            
+            <div class="form-group">
+                <label for="buyerMessage">Повідомлення продавцю</label>
+                <textarea id="buyerMessage" placeholder="Доброго дня! Мене цікавить цей товар..."></textarea>
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="sendMessage()">Надіслати повідомлення</button>
+        </div>
+    </div>
+
+    <script>
+        // Мобільне меню
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Плавна прокрутка
+        document.querySelectorAll('nav a, .logo').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Закриття мобільного меню
+                        if (window.innerWidth <= 768) {
+                            document.getElementById('mainNav').style.display = 'none';
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Модальне вікно
+        function openContactModal(productName, productPrice) {
+            document.getElementById('modalProductName').textContent = productName;
+            document.getElementById('modalProductPrice').textContent = productPrice;
+            document.getElementById('contactModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+        
+        // Закриття модального вікна при кліку поза ним
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        
+        // Надсилання повідомлення
+        function sendMessage() {
+            const buyerName = document.getElementById('buyerName').value;
+            const buyerContact = document.getElementById('buyerContact').value;
+            const productName = document.getElementById('modalProductName').textContent;
+            
+            if (!buyerName || !buyerContact) {
+                alert('Будь ласка, заповніть обов\'язкові поля');
+                return;
+            }
+            
+            alert(`Дякуємо, ${buyerName}! Ваше повідомлення щодо товару "${productName}" надіслано. Продавець зв'яжеться з вами за вказаними контактами.`);
+            closeModal();
+            
+            // Очищення форми
+            document.getElementById('buyerName').value = '';
+            document.getElementById('buyerContact').value = '';
+            document.getElementById('buyerMessage').value = '';
+        }
+        
+        // Форма додавання оголошення
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const productName = document.getElementById('productName').value;
+            const productPrice = document.getElementById('productPrice').value;
+            const sellerCity = document.getElementById('sellerCity').value;
+            
+            alert(`Дякуємо! Ваше оголошення "${productName}" за ${productPrice} грн у місті ${sellerCity} прийнято. Воно з'явиться на сайті протягом 24 годин.`);
+            
+            // Очищення форми
+            document.getElementById('sellForm').reset();
+            document.getElementById('sellerCity').value = "Кам'янське, Дніпропетровська область";
+            
+            // Прокрутка до початку
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Активний пункт меню при прокрутці
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Додавання гривні до всіх цін
+        document.addEventListener('DOMContentLoaded', function() {
+            const prices = document.querySelectorAll('.product-price');
+            prices.forEach(price => {
+                const value = price.textContent;
+                price.textContent = parseInt(value).toLocaleString('uk-UA') + ' грн';
+            });
+        });
+    </script>
+</body>
+</html>
